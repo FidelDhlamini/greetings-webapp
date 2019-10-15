@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/greet.css">
+
+
+</head>
+
+<body background="Human-Rights-Education.jpg">
+
+    <container>
+        <div class="row">
+            <div class="right">
+                <div class="center">
+                    <h1>Greeting</h1>
+                </div>
+            </div>
+            <form action="/greetUser" method="POST">
+                <div class="center">
+                    Name: <input name="name" rows='1' cols="15" class="nameInput" placeholder="Enter a Name"></input>
+                    <span class="nameCounter">{{counter}}</span>
+                </div>
+                <div class="center">
+
+                    <input type="radio" name="languageName" class="whichLanguage" value="English">
+                    <span class="label-body">English</span>
+                    </label>
+
+                    <label class="radio button">
+                        <input type="radio" name="languageName" class="whichLanguage" value="Xhosa">
+                        <span class="label-body">Xhosa</span>
+                    </label>
+                    <input type="radio" name="languageName" class="whichLanguage" value="Afrikaans">
+                    <span class="label-body">Afrikaans</span>
+                    </label>
+                </div>
+
+                <div class="center col-12">
+                    <button class="button-primary greetButton" type="submit" name="button">Greet Me!</button>
+                    <!-- <button class="button-primary resetButton" type="button" name="erase">Reset</button> -->
+                    <input type="button" value="Refresh Page" class="resetButton" onClick="location.href=location.href">
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-12 center">
+                    <span class="greetingMessage">
+                        {{getMsg}}
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </container>
+
+
+</body>
+
+</html>
