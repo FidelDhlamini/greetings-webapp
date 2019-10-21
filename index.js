@@ -51,6 +51,10 @@ app.post('/greetUser', function (req, res) {
 
     res.redirect('/');
 });
+app.get('/the-route', function (req, res) {
+    req.flash('info', 'Flash Message Added');
+    res.redirect('/');
+});
 
 app.post('/action', function (req, res) {
 

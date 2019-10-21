@@ -56,7 +56,7 @@ module.exports = function Greetings() {
         greet: greetMe,
         nameList: getNames,
         numberOfGreetedNames: totalNumberOfNamesGreeted,
-        lowerCase: convertToLowerCase,
+        lowerCase: convertToLowerCase
 
     }
 

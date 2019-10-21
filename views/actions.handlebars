@@ -1,0 +1,19 @@
+<div class="row">
+
+    <h1>Actions</h1>
+
+    <table name="users">
+        <tr>
+            <th>Name</th>
+            <th>Language</th>
+            <th>When</th>
+        </tr>
+        {{#each actions}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{cost}}</td>
+            <td>{{timeAgo}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
