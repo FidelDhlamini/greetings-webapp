@@ -46,7 +46,7 @@
                 <div class="center col-12">
                     <button class="button-primary greetButton" type="submit" name="button">Greet Me!</button>
                     <!-- <button class="button-primary resetButton" type="button" name="erase">Reset</button> -->
-                    <input type="button" value="Refresh Page" class="resetButton" onClick="location.href=location.href">
+                    <button type="submit" class="resetB" value="Reset" name="resetButton">Reset</button>
                 </div>
             </form>
 
@@ -55,9 +55,12 @@
                     <span class="greetingMessage">
                         {{getMsg}}
                     </span>
-                    
+
 
                 </div>
+
+                <a href="/action">Greeted Names</a>
+
                 <div class="col-12 center">
                     <span class="errorMessage">
                         {{messages.errorMsg}}

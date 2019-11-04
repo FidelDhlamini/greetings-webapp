@@ -11,9 +11,20 @@ const session = require('express-session');
 // var languageChosen = req.body.languageName
 
 
+const pg = require("pg");
+const Pool = pg.Pool;
+
+// we are using a special test database for the tests
+const connectionString = 'postgresql://codex:codex123@localhost:5432/testdb';
+
+const pool = new Pool({
+    connectionString
+});
+
+
 const app = express();
 
-const greeting = Greetings();
+const greeting = Greetings(pool);
 
 app.use(session({
     secret: "<add a secret string here>",
@@ -49,30 +60,34 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
     res.render("index", {
-        counter: greeting.numberOfGreetedNames(),
-        getMsg: greeting.greetMsg()
+        counter: await greeting.numberOfGreetedNames(),
+        getMsg: await greeting.greetMsg()
     })
 });
 
-app.post('/greetUser', function (req, res) {
+app.post('/greetUser', async function (req, res) {
     let nameInput = req.body.name;
     console.log('name Input', nameInput)
     let selectedLang = req.body.languageName;
-    if (nameInput === undefined || nameInput === "") {
-        console.log("dfg")
-        req.flash('errorMsg', 'Enter a name')
-    } else if (selectedLang === undefined || selectedLang === "") {
-        req.flash('errorMsg', 'select a Language for greeting')
-    } else {
-        greeting.greet(nameInput, selectedLang)
-        // req.flash('getMsg', greeting.greetMsg())
-        greeting.greetMsg()
+
+    if (req.body.resetButton === 'Reset') {
+        await greeting.resetData()
     }
-
-
-
+    
+    else {
+        if (nameInput === undefined || nameInput === "") {
+            console.log("dfg")
+            req.flash('errorMsg', 'Enter a name')
+        } else if (selectedLang === undefined || selectedLang === "") {
+            req.flash('errorMsg', 'select a Language for greeting')
+        } else {
+            await greeting.greet(nameInput, selectedLang)
+            // req.flash('getMsg', greeting.greetMsg())
+            greeting.greetMsg()
+        }
+    }
 
     res.redirect('/');
 });
@@ -88,14 +103,15 @@ app.get('/the-route', function (req, res) {
     res.redirect('/');
 });
 
-app.post('/action', function (req, res) {
+app.get('/action', async function (req, res) {
+    res.render('actions', {
+        actions: await greeting.finalTable()
+    })
 
-
-    res.redirect('/')
 })
 
 
-const PORT = process.env.PORT || 3021;
+const PORT = process.env.PORT || 3023;
 
 app.listen(PORT, function () {
     console.log("App started at port:", PORT)

@@ -1,22 +1,27 @@
-module.exports = function Greetings() {
+module.exports = function Greetings(pool) {
     let storedNames = {};
     var greetMessage = '';
+    var check;
 
-    function greetMe(name, language) {
+    async function greetMe(name, language) {
 
-        // if (!name) {
-        //     return "What's your name? Enter your name";
-        // }
-        // if (!language) {
-        //     return "Select a language";
-        // }
         name = name.replace(/\s/g, '')
         name = name.replace(/[0-9]/g, '');
         name = name.toLowerCase();
         name = name.charAt(0).toUpperCase() + name.slice(1);
 
+        check = await pool.query('SELECT DISTINCT greet_name, greet_count from greetings')
+
         if (storedNames[name] === undefined) {
             storedNames[name] = 0;
+        }
+
+        var storeNames = await pool.query('SELECT * from greetings WHERE greet_name = $1', [name])
+
+        if (storeNames.rowCount === 1) {
+            await pool.query('UPDATE greetings SET greet_count = greet_count + 1 WHERE greet_name = $1', [name])
+        } else {
+            await pool.query('insert into greetings (greet_name, greet_count) values ($1, $2)', [name, 1])
         }
 
         if (language === "English") {
@@ -33,7 +38,13 @@ module.exports = function Greetings() {
 
     }
 
-    function returnGreetMsg() {
+    async function finalTable() {
+        check = await pool.query('SELECT DISTINCT greet_name, greet_count from greetings')
+        return await check.rows
+
+    }
+
+    async function returnGreetMsg() {
         return greetMessage;
     }
 
@@ -41,12 +52,25 @@ module.exports = function Greetings() {
         return name.convertToLowerCase();
     }
 
-    function totalNumberOfNamesGreeted() {
+    async function totalNumberOfNamesGreeted() {
+        var countNames = await pool.query('select count(*) from greetings')
+        for (var i = 0; i < countNames.rows.length; i++) {
 
-        return Object.keys(storedNames).length
+            var counter = countNames.rows[i]
+
+        }
+        console.log(counter.count);
+
+
+        return counter.count
+
+        //return Object.keys(storedNames).length
+    }
+    async function resetData() {
+        await pool.query('DELETE from greetings')
     }
 
-    function getNames() {
+    async function getNames() {
         console.log(storedNames)
         return storedNames;
     }
@@ -56,7 +80,9 @@ module.exports = function Greetings() {
         greet: greetMe,
         nameList: getNames,
         numberOfGreetedNames: totalNumberOfNamesGreeted,
-        lowerCase: convertToLowerCase
+        lowerCase: convertToLowerCase,
+        resetData,
+        finalTable
 
     }
 

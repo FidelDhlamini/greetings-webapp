@@ -128,6 +128,11 @@ p {
   width: 4.33%;
 }
 
+.resetButton {
+  margin: 20em;
+  
+}
+
 .col-2-sm {
   width: 12.66%;
 }
@@ -249,15 +254,15 @@ p {
 body,
 html {
   height: 100%;
-   background-image: url("Human-Rights-Education.jpg");
+  background-image: url("Human-Rights-Education.jpg");
 
-   /* Full height */
-   height: 100%;
+  /* Full height */
+  height: 100%;
 
-   /* Center and scale the image nicely */
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 

@@ -4,15 +4,14 @@
 
     <table name="users">
         <tr>
-            <th>Name</th>
-            <th>Language</th>
-            <th>When</th>
+            <th>Names</th>
+            <th>Count</th>
         </tr>
         {{#each actions}}
         <tr>
-            <td>{{name}}</td>
-            <td>{{cost}}</td>
-            <td>{{timeAgo}}</td>
+            <td>{{greet_name}}</td>
+            <td>{{greet_count}}</td>
+
         </tr>
         {{/each}}
     </table>
