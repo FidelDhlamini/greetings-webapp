@@ -43,6 +43,17 @@ module.exports = function Greetings(pool) {
         return await check.rows
 
     }
+    async function perName(id) {
+        var getCount = await pool.query('SELECT * from greetings where greet_name = $1', [id])
+        var userName = getCount.rows
+
+        var nameD = userName[0].greet_name
+        var countD = userName[0].greet_count
+        console.log('user:', userName);
+        return nameD, countD
+
+    }
+
 
     async function returnGreetMsg() {
         return greetMessage;
@@ -82,7 +93,8 @@ module.exports = function Greetings(pool) {
         numberOfGreetedNames: totalNumberOfNamesGreeted,
         lowerCase: convertToLowerCase,
         resetData,
-        finalTable
+        finalTable,
+        perName
 
     }
 

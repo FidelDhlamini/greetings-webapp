@@ -11,7 +11,7 @@
 
 </head>
 
-<body background="Human-Rights-Education.jpg">
+<body background="../public/images/flag.jpg">
 
     <container>
         <div class="row">
@@ -22,7 +22,7 @@
             </div>
             <form action="/greetUser" method="POST">
                 <div class="center">
-                    Name: <input name="name" rows='1' cols="15" class="nameInput" placeholder="Enter a Name"></input>
+                    <input name="name" rows='1' cols="15" class="nameInput" placeholder="Enter a Name"></input>
                     <span class="nameCounter">{{counter}}</span>
                 </div>
                 <div class="entry">
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="center col-12">
-                    <button class="button-primary greetButton" type="submit" name="button">Greet Me!</button>
+                    <button class="button-primary greetButton" type="submit" name="button">Greet</button>
                     <!-- <button class="button-primary resetButton" type="button" name="erase">Reset</button> -->
                     <button type="submit" class="resetB" value="Reset" name="resetButton">Reset</button>
                 </div>
@@ -59,12 +59,14 @@
 
                 </div>
 
-                <a href="/action">Greeted Names</a>
 
                 <div class="col-12 center">
                     <span class="errorMessage">
                         {{messages.errorMsg}}
                     </span>
+                </div>
+                <div class="center col-12">
+                    <a href="/action">Greeted Names</a>
                 </div>
             </div>
         </div>

@@ -64,6 +64,7 @@ app.get('/', async function (req, res) {
     res.render("index", {
         counter: await greeting.numberOfGreetedNames(),
         getMsg: await greeting.greetMsg()
+
     })
 });
 
@@ -74,9 +75,7 @@ app.post('/greetUser', async function (req, res) {
 
     if (req.body.resetButton === 'Reset') {
         await greeting.resetData()
-    }
-    
-    else {
+    } else {
         if (nameInput === undefined || nameInput === "") {
             console.log("dfg")
             req.flash('errorMsg', 'Enter a name')
@@ -109,6 +108,15 @@ app.get('/action', async function (req, res) {
     })
 
 })
+app.get('/counter/:id', async function (req, res) {
+    let name = req.params.id
+    //   console.log(name);
+
+    res.render('counter', {
+        counter: await greeting.perName(name),
+        name: name
+    })
+});
 
 
 const PORT = process.env.PORT || 3023;
