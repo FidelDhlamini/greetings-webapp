@@ -90,9 +90,9 @@ app.post('/greetUser', async function (req, res) {
 
     res.redirect('/');
 });
-app.get('/the-route', function (req, res) {
+app.get('/the-route', async function (req, res) {
 
-    greeting.numberOfGreetedNames(nameToGreet, languageChosen)
+    await greeting.numberOfGreetedNames(nameToGreet, languageChosen)
     if (nameToGreet === "") {
         req.flash('info', 'Enter a name');
     }
