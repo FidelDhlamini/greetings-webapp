@@ -284,13 +284,19 @@ html {
 .greetButton {
   border-radius: 2px;
 
+  background-color: grey;
+
 }
 
 .resetB {
   border-radius: 2px;
   text-decoration-color: black;
+  background-color: grey;
 }
 
+.countDisplay {
+  text-align: center;
+}
 
 .nameInput {
   border-radius: 20px;
