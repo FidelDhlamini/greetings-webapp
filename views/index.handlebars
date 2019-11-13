@@ -23,7 +23,7 @@
             <form action="/greetUser" method="POST">
                 <div class="center">
                     <input name="name" rows='1' cols="15" class="nameInput" placeholder="Enter a Name"></input>
-                    <span class="nameCounter">{{counter}}</span>
+
                 </div>
                 <div class="entry">
                     <h1> {{messages.info}}</h1>
@@ -51,7 +51,7 @@
             </form>
 
             <div class="row">
-                <div class="col-12 center">
+                <div class="col-12 center grtmsg">
                     <span class="greetingMessage">
                         {{getMsg}}
                     </span>
@@ -64,6 +64,10 @@
                     <span class="errorMessage">
                         {{messages.errorMsg}}
                     </span>
+
+                </div>
+                <div class="col-12 center">
+                    No. Of Greeted Names : <span class="nameCounter">{{counter}}</span>
                 </div>
                 <div class="center col-12">
                     <a href="/action">Greeted Names</a>

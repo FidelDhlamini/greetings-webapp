@@ -298,6 +298,10 @@ html {
   text-align: center;
 }
 
+.grtmsg {
+  text-decoration-color: lightgreen;
+}
+
 .nameInput {
   border-radius: 20px;
   width: 150px;
