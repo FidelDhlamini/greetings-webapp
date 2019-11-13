@@ -296,10 +296,11 @@ html {
 
 .countDisplay {
   text-align: center;
+  text-size-adjust: 20px;
 }
 
 .grtmsg {
-  text-decoration-color: lightgreen;
+  text-decoration-color: yellow;
 }
 
 .nameInput {

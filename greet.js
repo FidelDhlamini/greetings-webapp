@@ -78,7 +78,9 @@ module.exports = function Greetings(pool) {
         //return Object.keys(storedNames).length
     }
     async function resetData() {
+        greetMessage = '';
         await pool.query('DELETE from greetings')
+
     }
 
     async function getNames() {
