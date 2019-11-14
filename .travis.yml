@@ -1,3 +1,24 @@
 language: node_js
 node_js:
   - 10.15.3
+
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/testdb
+
+node_js:  
+  - "8.9.4"
+
+before_script:
+  - psql -c 'create database  testdb;' -U postgres
+  - psql -U postgres -d testdb -a -f nameDatabase.sql
+services:
+  - postgresql
+
+addons:
+  apt:
+    sources:
+    - precise-pgdg-9.5
+    packages:
+    - postgresql-9.5
+    - postgresql-contrib-9.5
+  postgresql: 9.5
