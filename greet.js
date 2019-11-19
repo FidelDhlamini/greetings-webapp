@@ -2,6 +2,7 @@ module.exports = function Greetings(pool) {
     let storedNames = {};
     var greetMessage = '';
     var check;
+    var errorMsg;
 
     async function greetMe(name, language) {
 
@@ -20,6 +21,8 @@ module.exports = function Greetings(pool) {
 
         if (storeNames.rowCount === 1) {
             await pool.query('UPDATE greetings SET greet_count = greet_count + 1 WHERE greet_name = $1', [name])
+            errorMsg = "Name already exists"
+
         } else {
             await pool.query('insert into greetings (greet_name, greet_count) values ($1, $2)', [name, 1])
         }
@@ -37,7 +40,9 @@ module.exports = function Greetings(pool) {
         }
 
     }
-
+    async function checkExistence(name) {
+        checkName = await pool.query('select ')
+    }
     async function finalTable() {
         check = await pool.query('SELECT DISTINCT greet_name, greet_count from greetings')
         return await check.rows
@@ -52,6 +57,10 @@ module.exports = function Greetings(pool) {
         console.log('user:', userName);
         return nameD, countD
 
+    }
+
+    function errorMSG() {
+        return errorMsg;
     }
 
 
@@ -96,7 +105,8 @@ module.exports = function Greetings(pool) {
         lowerCase: convertToLowerCase,
         resetData,
         finalTable,
-        perName
+        perName,
+        errorMSG
 
     }
 

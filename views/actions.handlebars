@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row center">
 
     <h1>Actions</h1>
-
-    <table name="users">
+    {{!-- <div class="center nameTable"> --}}
+    <table class="center" name="users">
         <tr>
             <th>Names</th>
             <th>Count</th>
@@ -15,7 +15,10 @@
         </tr>
         {{/each}}
     </table>
-    <form action="/backHome" method="POST">
-        <button class="button-primary greetButton" type="submit" name="button">Home</button>
-    </form>
+    <div class="col-12">
+        <form action="/backHome" method="POST">
+            <button class="button-primary greetButton" type="submit" name="button">Home</button>
+        </form>
+    </div>
+
 </div>

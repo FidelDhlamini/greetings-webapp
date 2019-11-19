@@ -73,11 +73,19 @@ app.post('/greetUser', async function (req, res) {
     console.log('name Input', nameInput)
     let selectedLang = req.body.languageName;
 
+    let alrdyGreeted = greeting.nameList()
+
+    // for (i in alrdyGreeted) {
+    //     console.log(alrdyGreeted)
+
+    // if (nameInput) {
+    //     req.flash('errorMsg', 'dddddd')
+    // }
+    
     if (req.body.resetButton === 'Reset') {
         await greeting.resetData()
     } else {
         if (nameInput === undefined || nameInput === "") {
-            console.log("dfg")
             req.flash('errorMsg', 'Enter a name')
         } else if (selectedLang === undefined || selectedLang === "") {
             req.flash('errorMsg', 'select a Language for greeting')
@@ -85,6 +93,10 @@ app.post('/greetUser', async function (req, res) {
             await greeting.greet(nameInput, selectedLang)
             // req.flash('getMsg', greeting.greetMsg())
             greeting.greetMsg()
+
+            if (greeting.errorMSG()) {
+                req.flash('errorMsg', greeting.errorMSG())
+            }
         }
     }
 
