@@ -21,7 +21,7 @@ module.exports = function Greetings(pool) {
 
         if (storeNames.rowCount === 1) {
             await pool.query('UPDATE greetings SET greet_count = greet_count + 1 WHERE greet_name = $1', [name])
-            errorMsg = "Name already exists"
+            // errorMsg = "Name already exists"
 
         } else {
             await pool.query('insert into greetings (greet_name, greet_count) values ($1, $2)', [name, 1])
